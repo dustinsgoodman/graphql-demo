@@ -20,7 +20,7 @@ custom:
     httpPort: ${self:custom.ports.${self:service}.httpPort}
     lambdaPort: ${self:custom.ports.${self:service}.lambdaPort}
     useChildProcesses: false
-    useWorkerThreads: true
+    useWorkerThreads: false
 
   stage_env:
     dev: &dev
