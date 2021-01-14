@@ -1,10 +1,10 @@
 import CharacterModel from 'Models/CharacterModel';
 import { findAll } from 'Repos/CharacterRepo';
-import { main as lambda } from '../src/handlers/getCharacters';
+import { main as lambda } from '../src/handlers/characters';
 
 jest.mock('Repos/CharacterRepo');
 
-describe('.getCharacters', () => {
+describe('.characters', () => {
   let subject;
 
   beforeAll(async () => {
