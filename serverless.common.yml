@@ -12,6 +12,9 @@ custom:
     character-api:
       httpPort: 3004
       lambdaPort: 3006
+    location-api:
+      httpPort: 3008
+      lambdaPort: 3010
 
   serverless-offline:
     httpPort: ${self:custom.ports.${self:service}.httpPort}
