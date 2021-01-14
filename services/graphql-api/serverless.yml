@@ -1,0 +1,42 @@
+service: graphql-api
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-s3-remover
+  - serverless-webpack
+  - serverless-offline
+
+custom: ${file(../../serverless.common.yml):custom}
+
+package:
+  individually: true
+  exclude:
+    - ./**
+
+provider:
+  name: aws
+  stage: ${opt:stage, "local"}
+  region: ${opt:region, "us-east-1"}
+  runtime: nodejs12.x
+  profile: ${self:custom.profile}-${self:custom.stage_env.${self:provider.stage}.PROFILE, 'dev'}
+  environment: ${self:custom.stage_env.${self:provider.stage}}
+  tracing:
+    apiGateway: true
+    lambda: true
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: '*'
+
+functions:
+  graphql:
+    handler: src/handlers/graphql.graphqlHandler
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+      - http:
+          path: graphql
+          method: get
+          cors: true

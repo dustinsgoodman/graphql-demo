@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "API/*": ["src/api/*"],
+      "DB/*": ["src/db/*"],
+      "Errors/*": ["src/errors/*"],
+      "Helpers/*": ["src/helpers/*"],
+      "Models/*": ["src/models/*"],
+      "Phrases/*": ["src/phrases/*"],
+      "Repos/*": ["src/repos/*"],
+      "Utils/*": ["src/utils/*"]
+    }
+  }
+}
