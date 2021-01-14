@@ -1,4 +1,4 @@
-import { findById as repoFindById } from 'Repos/CharacterRepo';
+import { findById as repoFindById } from 'Repos/LocationRepo';
 import { LocationPhrases } from 'Phrases';
 import { ValidationError } from 'Errors';
 import LocationModel from './LocationModel';
