@@ -11,8 +11,10 @@ describe('characters Query', () => {
     const QUERY = gql`
       query CharactersQuery {
         characters {
-          id
-          name
+          nodes {
+            id
+            name
+          }
         }
       }
     `;
@@ -20,10 +22,12 @@ describe('characters Query', () => {
     const { query } = generateTestClient({});
     invoke.mockReturnValue({
       code: 'OK',
-      message: [
-        { id: 1, name: 'Rick' },
-        { id: 2, name: 'Morty' },
-      ],
+      message: {
+        nodes: [
+          { id: 1, name: 'Rick' },
+          { id: 2, name: 'Morty' },
+        ],
+      },
       statusCode: 200,
     });
     subject = await query({
@@ -31,12 +35,14 @@ describe('characters Query', () => {
     });
   });
 
-  test('returns the HelloWorld string', () => {
+  test('returns paginated character data', () => {
     expect(subject.data).toEqual({
-      characters: [
-        { id: '1', name: 'Rick' },
-        { id: '2', name: 'Morty' },
-      ],
+      characters: {
+        nodes: [
+          { id: '1', name: 'Rick' },
+          { id: '2', name: 'Morty' },
+        ],
+      },
     });
   });
 });
