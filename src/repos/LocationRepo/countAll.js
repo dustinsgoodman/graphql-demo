@@ -1,10 +1,10 @@
 import { GenericError } from 'Errors';
 import { collection } from './collection';
 
-export const findById = async (id) => {
+export const countAll = async () => {
   try {
-    const record = await collection.findByPk(id);
-    return record.dataValues;
+    const count = await collection.count();
+    return count;
   } catch (e) {
     throw new GenericError();
   }
