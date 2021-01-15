@@ -8843,6 +8843,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"graphql-scalars@npm:^1.7.0":
+  version: 1.7.0
+  resolution: "graphql-scalars@npm:1.7.0"
+  dependencies:
+    tslib: ~2.0.3
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+  checksum: dff7f088f7e5de62f88f0ee55e89b64b85cc917c8da09f862a595829b5b5126c199cd27630b540c991167fa0f87f90a6b935984d0da1e15505f65ccea3d2c2e5
+  languageName: node
+  linkType: hard
+
 "graphql-schema-linter@npm:^1.0.1":
   version: 1.0.1
   resolution: "graphql-schema-linter@npm:1.0.1"
@@ -14787,6 +14798,7 @@ fsevents@^1.2.7:
     eslint-plugin-prettier: ^3.1.4
     graphql: ^15.3.0
     graphql-request: ^3.1.0
+    graphql-scalars: ^1.7.0
     graphql-schema-linter: ^1.0.1
     hard-source-webpack-plugin: ^0.13.1
     husky: ^4.3.0
@@ -16304,6 +16316,13 @@ fsevents@^1.2.7:
   version: 2.0.1
   resolution: "tslib@npm:2.0.1"
   checksum: 7b42337a07f536c9650c72471cdf51317f07eb981692e91b8979fee3f6e20136a8f047e6ecdc5f2f3201132a6cc4e0096fa3c58655eba3803bf7fe739ccd088e
+  languageName: node
+  linkType: hard
+
+"tslib@npm:~2.0.3":
+  version: 2.0.3
+  resolution: "tslib@npm:2.0.3"
+  checksum: 447bfca5deaa157806c3f77eaba74d05dd0b38b014e47ce79d98b5c77ce7d91b00a687ba13ca1b5a74d35ca1098ac7a072c0a97fad06f0266612f2a03a6c8e8f
   languageName: node
   linkType: hard
 

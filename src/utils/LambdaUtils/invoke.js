@@ -4,6 +4,7 @@ import { downcaseKeys } from 'Utils/ObjectUtils';
 const PORTS = {
   'graphql-api': 3002,
   'character-api': 3006,
+  'location-api': 3010,
 };
 
 /**

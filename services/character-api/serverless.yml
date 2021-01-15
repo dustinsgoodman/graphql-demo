@@ -29,9 +29,16 @@ provider:
       Resource: '*'
 
 functions:
-  getCharacters:
-    handler: src/handlers/getCharacters.main
+  characters:
+    handler: src/handlers/characters.main
     events:
       - http:
           path: characters
+          method: get
+
+  character:
+    handler: src/handlers/character.main
+    events:
+      - http:
+          path: character
           method: get

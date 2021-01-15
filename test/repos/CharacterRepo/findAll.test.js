@@ -1,5 +1,5 @@
 import { UnknownError } from 'Phrases/ErrorPhrases';
-import { findAll, create } from 'Repos/CharacterRepo';
+import { findAll, create, collection } from 'Repos/CharacterRepo';
 import { dbSetupAndTeardown, getConnection } from '../dbSetupAndTeardown';
 
 dbSetupAndTeardown();
@@ -30,6 +30,10 @@ describe('.findAll', () => {
     create(characterDoc2);
   });
 
+  afterAll(() => {
+    collection.sync({ force: true });
+  });
+
   describe('when retrieves successfully', () => {
     beforeAll(async () => {
       subject = await findAll();
@@ -39,6 +43,20 @@ describe('.findAll', () => {
       expect(subject).toEqual(
         expect.arrayContaining([
           expect.objectContaining({ id: expect.any(Number), ...characterDoc1 }),
+          expect.objectContaining({ id: expect.any(Number), ...characterDoc2 }),
+        ])
+      );
+    });
+  });
+
+  describe('when pagination', () => {
+    beforeAll(async () => {
+      subject = await findAll({ pagination: { page: 2, perPage: 1 } });
+    });
+
+    test('returns specified page results', () => {
+      expect(subject).toEqual(
+        expect.arrayContaining([
           expect.objectContaining({ id: expect.any(Number), ...characterDoc2 }),
         ])
       );

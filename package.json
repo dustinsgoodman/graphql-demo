@@ -24,6 +24,7 @@
     "apollo-server-lambda": "^2.18.1",
     "aws-sdk": "^2.758.0",
     "graphql": "^15.3.0",
+    "graphql-scalars": "^1.7.0",
     "lodash": "^4.17.20",
     "path": "^0.12.7",
     "sequelize": "^6.3.5",

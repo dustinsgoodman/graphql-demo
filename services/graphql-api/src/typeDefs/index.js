@@ -1,5 +1,8 @@
 import { gql } from 'apollo-server-lambda';
+import { DateTimeTypeDefinition, URLTypeDefinition } from 'graphql-scalars';
+
 import { characterTypeDef } from './character';
+import { paginationTypeDef } from './pagination';
 
 const baseTypeDefs = gql`
   """
@@ -27,4 +30,11 @@ const baseTypeDefs = gql`
   }
 `;
 
-export const typeDefs = [baseTypeDefs, characterTypeDef];
+export const typeDefs = [
+  baseTypeDefs,
+  characterTypeDef,
+  paginationTypeDef,
+  // from graphql-scalars
+  DateTimeTypeDefinition,
+  URLTypeDefinition,
+];

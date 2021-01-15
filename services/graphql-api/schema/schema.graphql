@@ -41,10 +41,51 @@ type Character {
   name: String
 }
 
+"""Character repsonse object for pagination"""
+type CharacterConnection {
+  """List of characters"""
+  nodes: [Character]
+
+  """Pagination information"""
+  pageInfo: PageInfo
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
 """Collections of mutations for schema"""
 type Mutation {
   """Empty mutation type to serve as a parent for all other mutations"""
   _: String
+}
+
+"""PageInfo object for describing the pagination info on response"""
+type PageInfo {
+  """What page was returned"""
+  page: Int
+
+  """Number of items returned for the page"""
+  perPage: Int
+
+  """Total number of items"""
+  total: Int
+
+  """Total number of pages"""
+  totalPages: Int
+}
+
+"""Pagination input object for selecting a page"""
+input PaginationInput {
+  """Page to return"""
+  page: Int
+
+  """Items to return per page"""
+  perPage: Int
+
+  """Sorting direction to return objects"""
+  sortDirection: SortDirection
 }
 
 """Collections of queries for schema"""
@@ -53,7 +94,16 @@ type Query {
   _: String
 
   """Returns a list of all the characters"""
-  characters: [Character]
+  characters(pagination: PaginationInput): CharacterConnection
+}
+
+"""Enum of sorting directions"""
+enum SortDirection {
+  """Ascending"""
+  ASC
+
+  """Descending"""
+  DESC
 }
 
 """Collections of subscriptions for schema"""
@@ -63,3 +113,8 @@ type Subscription {
   """
   _: String
 }
+
+"""
+A field whose value conforms to the standard URL format as specified in RFC3986: https://www.ietf.org/rfc/rfc3986.txt.
+"""
+scalar URL

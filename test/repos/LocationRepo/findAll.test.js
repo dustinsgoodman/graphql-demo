@@ -1,4 +1,4 @@
-import { findAll, create } from 'Repos/LocationRepo';
+import { findAll, create, collection } from 'Repos/LocationRepo';
 import { UnknownError } from 'Phrases/ErrorPhrases';
 import { dbSetupAndTeardown, getConnection } from '../dbSetupAndTeardown';
 
@@ -24,6 +24,10 @@ describe('.findAll', () => {
     create(locationDoc2);
   });
 
+  afterAll(() => {
+    collection.sync({ force: true });
+  });
+
   describe('when retrieves successfully', () => {
     beforeAll(async () => {
       subject = await findAll();
@@ -36,6 +40,23 @@ describe('.findAll', () => {
             id: expect.any(Number),
             ...locationDoc1,
           }),
+          expect.objectContaining({
+            id: expect.any(Number),
+            ...locationDoc2,
+          }),
+        ])
+      );
+    });
+  });
+
+  describe('when pagination', () => {
+    beforeAll(async () => {
+      subject = await findAll({ pagination: { page: 2, perPage: 1 } });
+    });
+
+    test('returns specified page results', () => {
+      expect(subject).toEqual(
+        expect.arrayContaining([
           expect.objectContaining({
             id: expect.any(Number),
             ...locationDoc2,
