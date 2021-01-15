@@ -1,10 +1,10 @@
 import { UnknownError } from 'Phrases/ErrorPhrases';
-import { findAll, create, collection } from 'Repos/CharacterRepo';
+import { countAll, create, collection } from 'Repos/CharacterRepo';
 import { dbSetupAndTeardown, getConnection } from '../dbSetupAndTeardown';
 
 dbSetupAndTeardown();
 
-describe('.findAll', () => {
+describe('.countAll', () => {
   let subject;
   let characterDoc1;
   let characterDoc2;
@@ -36,23 +36,18 @@ describe('.findAll', () => {
 
   describe('when retrieves successfully', () => {
     beforeAll(async () => {
-      subject = await findAll();
+      subject = await countAll();
     });
 
-    test('returns all docs', () => {
-      expect(subject).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ id: expect.any(Number), ...characterDoc1 }),
-          expect.objectContaining({ id: expect.any(Number), ...characterDoc2 }),
-        ])
-      );
+    test('returns count', () => {
+      expect(subject).toEqual(2);
     });
   });
 
   describe('when unknown error occurs', () => {
     beforeAll(async () => {
       await getConnection().drop();
-      subject = findAll();
+      subject = countAll();
     });
 
     test('throws error', async () => {

@@ -1,10 +1,10 @@
-import { findAll, create, collection } from 'Repos/LocationRepo';
+import { findById, create, collection } from 'Repos/LocationRepo';
 import { UnknownError } from 'Phrases/ErrorPhrases';
 import { dbSetupAndTeardown, getConnection } from '../dbSetupAndTeardown';
 
 dbSetupAndTeardown();
 
-describe('.findAll', () => {
+describe('.findById', () => {
   let subject;
   let locationDoc1;
   let locationDoc2;
@@ -30,21 +30,15 @@ describe('.findAll', () => {
 
   describe('when retrieves successfully', () => {
     beforeAll(async () => {
-      subject = await findAll();
+      subject = await findById(1);
     });
 
     test('returns all docs', () => {
       expect(subject).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({
-            id: expect.any(Number),
-            ...locationDoc1,
-          }),
-          expect.objectContaining({
-            id: expect.any(Number),
-            ...locationDoc2,
-          }),
-        ])
+        expect.objectContaining({
+          id: 1,
+          ...locationDoc1,
+        })
       );
     });
   });
@@ -52,7 +46,7 @@ describe('.findAll', () => {
   describe('when unknown error occurs', () => {
     beforeAll(async () => {
       await getConnection().drop();
-      subject = findAll();
+      subject = findById(1);
     });
 
     test('throws error', async () => {

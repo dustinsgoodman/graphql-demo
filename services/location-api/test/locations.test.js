@@ -1,18 +1,18 @@
-import CharacterModel from 'Models/CharacterModel';
-import { findAll, countAll } from 'Repos/CharacterRepo';
+import LocationModel from 'Models/LocationModel';
+import { findAll, countAll } from 'Repos/LocationRepo';
 import { INTERNAL_ERROR, OK } from 'Utils/ResponseCodeUtils';
-import { main as lambda } from '../src/handlers/characters';
+import { main as lambda } from '../src/handlers/locations';
 
-jest.mock('Repos/CharacterRepo');
+jest.mock('Repos/LocationRepo');
 
-describe('.characters', () => {
+describe('.locations', () => {
   let subject;
 
   describe('when fetches data successfully', () => {
     beforeAll(async () => {
       findAll.mockReturnValue([
-        { id: 1, name: 'Rick' },
-        { id: 2, name: 'Morty' },
+        { id: 1, name: 'Earth (C-137)' },
+        { id: 2, name: 'Abadango' },
       ]);
       countAll.mockReturnValue(2);
       const event = {
@@ -30,9 +30,9 @@ describe('.characters', () => {
       expect(subject.code).toBe(OK);
     });
 
-    test('returns paginated characters data', () => {
+    test('returns paginated locations data', () => {
       expect(subject.message).toEqual({
-        nodes: expect.arrayContaining([expect.any(CharacterModel), expect.any(CharacterModel)]),
+        nodes: expect.arrayContaining([expect.any(LocationModel), expect.any(LocationModel)]),
         pageInfo: {
           page: 1,
           perPage: 10,
