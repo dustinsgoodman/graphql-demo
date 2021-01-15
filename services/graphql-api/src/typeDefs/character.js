@@ -5,10 +5,24 @@ export const characterTypeDef = gql`
   Defines Character type for API
   """
   type Character {
+    "Created at date time in ISO format"
+    createdAt: DateTime!
+    "Gender identity if known"
+    gender: Gender
     "Unique identifier"
-    id: ID
+    id: ID!
+    "URL for image asset"
+    image: URL!
     "Human readable name"
-    name: String
+    name: String!
+    "Species identification"
+    species: String!
+    "Alive or Dead status if known"
+    status: CharacterStatus
+    "Description of the character"
+    type: String!
+    "Updated at date time in ISO format"
+    updatedAt: DateTime!
   }
 
   """
@@ -21,8 +35,31 @@ export const characterTypeDef = gql`
     pageInfo: PageInfo
   }
 
+  """
+  What is the state of this character?
+  """
+  enum CharacterStatus {
+    "Alive"
+    ALIVE
+    "Dead"
+    DEAD
+  }
+  """
+  How does this character identify?
+  """
+  enum Gender {
+    "Non-binary or unknown"
+    GENDERLESS
+    "Female"
+    FEMALE
+    "Male"
+    MALE
+  }
+
   extend type Query {
     "Returns a list of all the characters"
     characters(pagination: PaginationInput): CharacterConnection
+    "Returns a character given its ID"
+    character(id: ID!): Character
   }
 `;
