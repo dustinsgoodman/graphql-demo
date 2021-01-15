@@ -1,15 +1,16 @@
 import { merge } from 'Utils/ObjectUtils';
-import { DateTimeResolver, URLResolver } from 'graphql-scalars';
+import { URLResolver } from 'graphql-scalars';
 import { characterResolvers } from './character';
+import { datetimeResolvers } from './datetime';
 import { locationResolvers } from './location';
 
 export const resolvers = merge(
   {},
   characterResolvers,
+  datetimeResolvers,
   locationResolvers,
   // from graphql-scalars
   {
-    DateTime: DateTimeResolver,
     URL: URLResolver,
   }
 );
