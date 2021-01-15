@@ -1,11 +1,11 @@
 import { UserInputError, ApolloError } from 'apollo-server-lambda';
 import { invoke } from 'Utils/LambdaUtils';
 
-export const characters = async (parent, { pagination }, context) => {
+export const characters = async (parent, args, context) => {
   const { code, message, statusCode } = await invoke({
     serviceName: 'character-api',
-    functionName: 'characters',
-    payload: { pagination },
+    functionName: 'getCharacters',
+    payload: {},
     context,
   });
 

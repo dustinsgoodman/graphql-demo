@@ -34,68 +34,17 @@ directive @connection(
 
 """Defines Character type for API"""
 type Character {
-  """Created at date time in ISO format"""
-  createdAt: DateTime!
-
-  """Gender identity if known"""
-  gender: Gender
-
   """Unique identifier"""
-  id: ID!
-
-  """URL for image asset"""
-  image: URL!
+  id: ID
 
   """Human readable name"""
-  name: String!
-
-  """Species identification"""
-  species: String!
-
-  """Alive or Dead status if known"""
-  status: CharacterStatus
-
-  """Description of the character"""
-  type: String!
-
-  """Updated at date time in ISO format"""
-  updatedAt: DateTime!
-}
-
-"""Character repsonse object for pagination"""
-type CharacterConnection {
-  """List of characters"""
-  nodes: [Character]
-
-  """Pagination information"""
-  pageInfo: PageInfo
-}
-
-"""What is the state of this character?"""
-enum CharacterStatus {
-  """Alive"""
-  ALIVE
-
-  """Dead"""
-  DEAD
+  name: String
 }
 
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
 """
 scalar DateTime
-
-"""How does this character identify?"""
-enum Gender {
-  """Female"""
-  FEMALE
-
-  """Non-binary or unknown"""
-  GENDERLESS
-
-  """Male"""
-  MALE
-}
 
 """Collections of mutations for schema"""
 type Mutation {
@@ -135,11 +84,8 @@ type Query {
   """Empty query type to serve as a parent for all other queries"""
   _: String
 
-  """Returns a character given its ID"""
-  character(id: ID!): Character
-
   """Returns a list of all the characters"""
-  characters(pagination: PaginationInput): CharacterConnection
+  characters: [Character]
 }
 
 """Enum of sorting directions"""
