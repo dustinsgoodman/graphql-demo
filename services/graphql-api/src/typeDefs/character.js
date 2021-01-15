@@ -5,8 +5,6 @@ export const characterTypeDef = gql`
   Defines Character type for API
   """
   type Character {
-    "What is their current location?"
-    currentLocation: Location
     "Created at date time in ISO format"
     createdAt: DateTime!
     "Gender identity if known"
@@ -17,8 +15,6 @@ export const characterTypeDef = gql`
     image: URL!
     "Human readable name"
     name: String!
-    "Where are they from originally?"
-    origin: Location
     "Species identification"
     species: String!
     "Alive or Dead status if known"
