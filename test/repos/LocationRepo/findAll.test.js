@@ -49,6 +49,23 @@ describe('.findAll', () => {
     });
   });
 
+  describe('when pagination', () => {
+    beforeAll(async () => {
+      subject = await findAll({ pagination: { page: 2, perPage: 1 } });
+    });
+
+    test('returns specified page results', () => {
+      expect(subject).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            id: expect.any(Number),
+            ...locationDoc2,
+          }),
+        ])
+      );
+    });
+  });
+
   describe('when unknown error occurs', () => {
     beforeAll(async () => {
       await getConnection().drop();

@@ -11,8 +11,18 @@ export const characterTypeDef = gql`
     name: String
   }
 
+  """
+  Character repsonse object for pagination
+  """
+  type CharacterConnection {
+    "List of characters"
+    nodes: [Character]
+    "Pagination information"
+    pageInfo: PageInfo
+  }
+
   extend type Query {
     "Returns a list of all the characters"
-    characters: [Character]
+    characters(pagination: PaginationInput): CharacterConnection
   }
 `;
