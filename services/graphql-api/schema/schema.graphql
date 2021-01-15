@@ -37,6 +37,9 @@ type Character {
   """Created at date time in ISO format"""
   createdAt: DateTime!
 
+  """What is their current location?"""
+  currentLocation: Location
+
   """Gender identity if known"""
   gender: Gender
 
@@ -48,6 +51,9 @@ type Character {
 
   """Human readable name"""
   name: String!
+
+  """Where are they from originally?"""
+  origin: Location
 
   """Species identification"""
   species: String!
