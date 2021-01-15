@@ -4,7 +4,7 @@ import { invoke } from 'Utils/LambdaUtils';
 export const characters = async (parent, { pagination }, context) => {
   const { code, message, statusCode } = await invoke({
     serviceName: 'character-api',
-    functionName: 'getCharacters',
+    functionName: 'characters',
     payload: { pagination },
     context,
   });
