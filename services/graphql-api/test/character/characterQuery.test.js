@@ -14,16 +14,33 @@ describe('character Query', () => {
           character(id: 1) {
             id
             name
+            origin {
+              id
+            }
+            currentLocation {
+              id
+            }
           }
         }
       `;
 
       const { query } = generateTestClient({});
-      invoke.mockReturnValue({
-        code: 'OK',
-        message: { id: 1, name: 'Rick' },
-        statusCode: 200,
-      });
+      invoke
+        .mockReturnValueOnce({
+          code: 'OK',
+          message: { id: 1, name: 'Rick' },
+          statusCode: 200,
+        })
+        .mockReturnValueOnce({
+          code: 'OK',
+          message: { id: 2, name: 'Earth 1' },
+          statusCode: 200,
+        })
+        .mockReturnValueOnce({
+          code: 'OK',
+          message: { id: 3, name: 'Earth 3' },
+          statusCode: 200,
+        });
       subject = await query({
         query: QUERY,
       });
@@ -31,7 +48,16 @@ describe('character Query', () => {
 
     test('returns paginated character data', () => {
       expect(subject.data).toEqual({
-        character: { id: '1', name: 'Rick' },
+        character: {
+          id: '1',
+          name: 'Rick',
+          origin: {
+            id: '2',
+          },
+          currentLocation: {
+            id: '3',
+          },
+        },
       });
     });
   });
