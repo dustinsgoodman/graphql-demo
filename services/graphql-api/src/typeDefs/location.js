@@ -6,7 +6,7 @@ export const locationTypeDef = gql`
   """
   type Location {
     "Created at date time in ISO format"
-    createdAt: DateTime!
+    createdAt(format: DateTimeDisplayFormat = DATETIME): DateTime!
     "What dimension is this location within"
     dimension: String!
     "Unique identifier"
@@ -16,7 +16,7 @@ export const locationTypeDef = gql`
     "Classification of location"
     type: String!
     "Updated at date time in ISO format"
-    updatedAt: DateTime!
+    updatedAt(format: DateTimeDisplayFormat = DATETIME): DateTime!
   }
   """
   Location repsonse object for pagination

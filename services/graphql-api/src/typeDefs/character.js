@@ -8,7 +8,7 @@ export const characterTypeDef = gql`
     "What is their current location?"
     currentLocation: Location
     "Created at date time in ISO format"
-    createdAt: DateTime!
+    createdAt(format: DateTimeDisplayFormat = DATETIME): DateTime!
     "Gender identity if known"
     gender: Gender
     "Unique identifier"
@@ -26,7 +26,7 @@ export const characterTypeDef = gql`
     "Description of the character"
     type: String!
     "Updated at date time in ISO format"
-    updatedAt: DateTime!
+    updatedAt(format: DateTimeDisplayFormat = DATETIME): DateTime!
   }
 
   """

@@ -35,7 +35,7 @@ directive @connection(
 """Defines Character type for API"""
 type Character {
   """Created at date time in ISO format"""
-  createdAt: DateTime!
+  createdAt(format: DateTimeDisplayFormat = DATETIME): DateTime!
 
   """What is their current location?"""
   currentLocation: Location
@@ -65,7 +65,7 @@ type Character {
   type: String!
 
   """Updated at date time in ISO format"""
-  updatedAt: DateTime!
+  updatedAt(format: DateTimeDisplayFormat = DATETIME): DateTime!
 }
 
 """Character repsonse object for pagination"""
@@ -87,9 +87,21 @@ enum CharacterStatus {
 }
 
 """
-A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+A date-time representation. If a number is provided, the unix timestamp in seconds or milliseconds will be returned. If a DateTime or String is provided, the ISO 8601 standard will be returned.
 """
 scalar DateTime
+
+"""Format enum for choosing display for date time values"""
+enum DateTimeDisplayFormat {
+  """Date time as ISO 8601 string"""
+  DATETIME
+
+  """Milliseconds since epoch"""
+  MILLISECONDS
+
+  """Seconds since epoch"""
+  SECONDS
+}
 
 """How does this character identify?"""
 enum Gender {
@@ -106,7 +118,7 @@ enum Gender {
 """Defines Location type"""
 type Location {
   """Created at date time in ISO format"""
-  createdAt: DateTime!
+  createdAt(format: DateTimeDisplayFormat = DATETIME): DateTime!
 
   """What dimension is this location within"""
   dimension: String!
@@ -121,7 +133,7 @@ type Location {
   type: String!
 
   """Updated at date time in ISO format"""
-  updatedAt: DateTime!
+  updatedAt(format: DateTimeDisplayFormat = DATETIME): DateTime!
 }
 
 """Location repsonse object for pagination"""
